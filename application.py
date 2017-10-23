@@ -33,8 +33,7 @@ def handleConnected(message):
     for result in results['hits']['hits']:
         for key in data:
             data[key].append(result['_source'][key])
-    print(data)
-    
+
     send(json.dumps(data))
 
 
