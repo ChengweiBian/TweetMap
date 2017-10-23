@@ -39,16 +39,14 @@ class StdOutListener(StreamListener):
 					'time': tweet['time']
 					})
 
-				#postURL = 'https://search-movies-bqwntmyexehs2j35wwq4tstn4a.us-west-2.es.amazonaws.com' # AWS endpoint
-				#r = requests.post(postURL, json = tweet)
-
 				print(tweet)
+
 		except Exception as e:
 			print('Error! {0}: {1}'.format(type(e), str(e)))
 
 if __name__ == '__main__':
 	# Create elasticsearch instance
-	es = Elasticsearch()
+	es = Elasticsearch(['https://search-tweetmap-6c2ha6a5qww6zywmv7kxhj3gx4.us-east-1.es.amazonaws.com',])
 
 	# This handles Twitter authetification and the connection to Twitter Streaming API
 	l = StdOutListener()
@@ -56,5 +54,5 @@ if __name__ == '__main__':
 	auth.set_access_token(access_token, access_token_secret)
 	stream = Stream(auth, l)
 
-	stream.filter(track = ['Trump', 'Hillary', 'Sanders', 'Facebook', 'LinkedIn',
-                             'Amazon', 'Google', 'Los Angeles', 'Columbia', 'New York'])
+	stream.filter(track = ['hungry', 'awkward', 'boring', 'sleepy', 'tired',
+                             'angry', 'depressed', 'excited', 'happy', 'sad'])

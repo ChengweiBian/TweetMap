@@ -16,8 +16,10 @@
     </style>
 
     <!-- Bootstrap core CSS and JQuery-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">    <style type="text/css">
 
@@ -49,16 +51,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Keywords <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript: queryKeyWord('Trump');">Trump</a></li>
-                        <li><a href="javascript: queryKeyWord('Hillary');">Hillary</a></li>
-                        <li><a href="javascript: queryKeyWord('Sanders');">Sanders</a></li>
-                        <li><a href="javascript: queryKeyWord('Facebook');">Facebook</a></li>
-                        <li><a href="javascript: queryKeyWord('Google');">Google</a></li>
-                        <li><a href="javascript: queryKeyWord('Los Angeles');">Los Angeles</a></li>
-                        <li><a href="javascript: queryKeyWord('Columbia');">Columbia</a></li>
-                        <li><a href="javascript: queryKeyWord('New York');">New York</a></li>
-                        <li><a href="javascript: queryKeyWord('LinkedIn');">LinkedIn</a></li>
-                        <li><a href="javascript: queryKeyWord('Amazon');">Amazon</a></li>
+                        <li><a href="javascript: queryKeyWord('hungry');">hungry</a></li>
+                        <li><a href="javascript: queryKeyWord('awkward');">awkward</a></li>
+                        <li><a href="javascript: queryKeyWord('boring');">boring</a></li>
+                        <li><a href="javascript: queryKeyWord('sleepy');">sleepy</a></li>
+                        <li><a href="javascript: queryKeyWord('tired');">tired</a></li>
+                        <li><a href="javascript: queryKeyWord('angry');">angry</a></li>
+                        <li><a href="javascript: queryKeyWord('depressed');">depressed</a></li>
+                        <li><a href="javascript: queryKeyWord('excited');">excited</a></li>
+                        <li><a href="javascript: queryKeyWord('happy');">happy</a></li>
+                        <li><a href="javascript: queryKeyWord('sad');">sad</a></li>
                     </ul>
                 </li>
             </ul>
@@ -203,7 +205,7 @@
             // Add markers to the locations
             var infowindow = new google.maps.InfoWindow({maxWidth: 200});
             var icon = {
-              url: '../static/circle.png',
+              url: '../static/doublecircle.png',
               scaledSize: new google.maps.Size(8, 8)
             };
             for(var i = 0; i < locations.length; i++){
@@ -277,7 +279,8 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6c1zns6rF4YOFlrwfBvRF6XI3g-uKfgU&callback=initMap">
 </script>
-<script src="../static/js/bootstrap.min.js"></script>
+
+<!-- <script src="../static/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 </body>
 </html>

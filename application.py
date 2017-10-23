@@ -16,7 +16,8 @@ def hello_world():
 @socketio.on('message')
 def handleConnected(message):
     # use localhosted elasticsearch
-    es = Elasticsearch()
+    es = Elasticsearch(['https://search-tweetmap-6c2ha6a5qww6zywmv7kxhj3gx4.us-east-1.es.amazonaws.com',])
+    #es = Elasticsearch();
     
     if message == 'Init':
         results = es.search(index="twitter", size=2000, body={ "query": { "match_all": {} } })
