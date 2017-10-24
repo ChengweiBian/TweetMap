@@ -13,6 +13,8 @@ access_token_secret = "nvwDEdY7a6MccvKFuQQvUmwcjadVKB4B7tc6aNwxRG7aw"
 consumer_key = "RKlq1R5ug0JeQooH3VgwYglXa"
 consumer_secret = "xwy29DNnp8SeoUwBdivi5KvW0UWGFctqZwqTZYr9k2ak25giO6"
 
+keywords = ['glad', 'lucky', 'happy', 'excited', 'wonderful', 'upset', 'bad', 'terrible', 'unhappy', 'sad']
+
 
 # This is a basic listener that just prints received tweets to stdout
 class StdOutListener(StreamListener):
@@ -32,12 +34,15 @@ class StdOutListener(StreamListener):
 				tweet['time'] = str(status.created_at)
 
 				#Store twitter data into elasticsearch
-				es.index(index = 'twitter', doc_type = 'tweet', body = {
-					'user': tweet['user'],
-					'text': tweet['text'],
-					'location': tweet['location'],
-					'time': tweet['time']
-					})
+				for key in keywords:
+					if key in tweet['text']:
+						es.index(index = 'twitters', doc_type = 'tweet', body = {
+							'keyword': key,
+							'user': tweet['user'],
+							'text': tweet['text'],
+							'location': tweet['location'],
+							'time': tweet['time']
+						})
 
 				print(tweet)
 
@@ -46,7 +51,33 @@ class StdOutListener(StreamListener):
 
 if __name__ == '__main__':
 	# Create elasticsearch instance
+	#es = Elasticsearch()
+	#es.indices.delete(index='twitter', ignore=[400, 404])
 	es = Elasticsearch(['https://search-tweetmap-6c2ha6a5qww6zywmv7kxhj3gx4.us-east-1.es.amazonaws.com',])
+	if not es.indices.exists(index='twitters'):
+		es.indices.create(index='twitters', body={
+        	'mappings': {
+            	'tweet': {
+                	'properties': {
+                		"keyword": {
+                    		"type": "string",
+                		},
+                    	"location": {
+                        	"type": "geo_point"
+                    	},
+                    	"user": {
+                        	"type": "string"
+                    	},
+                    	"time": {
+                    		"type": "string"
+                    	},
+                    	"text": {
+                    		"type": "string"
+                		}
+                	}
+            	}
+        	}
+        })
 
 	# This handles Twitter authetification and the connection to Twitter Streaming API
 	l = StdOutListener()
@@ -54,5 +85,4 @@ if __name__ == '__main__':
 	auth.set_access_token(access_token, access_token_secret)
 	stream = Stream(auth, l)
 
-	stream.filter(track = ['hungry', 'awkward', 'boring', 'sleepy', 'tired',
-                             'angry', 'depressed', 'excited', 'happy', 'sad'])
+	stream.filter(track = keywords)
