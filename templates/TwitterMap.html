@@ -14,14 +14,12 @@
             height: 100%;
         }
     </style>
-
-    <!-- Bootstrap core CSS and JQuery-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">    <style type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">    <style type="text/css">
 
         #topNavbar {
             margin-bottom: 0px;
@@ -53,8 +51,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a id="home123" href="/">Home</a></li>
-                <li class="dropdown">
+ -->                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Keywords <span class="caret"></span></a>
                     <ul id="dropdown123" class="dropdown-menu">
@@ -72,8 +69,9 @@
                 </li>
             </ul>
             <form class="navbar-form navbar-left">
-                <input id="search" type="text" class="form-control" id="keyword" placeholder="Type Keyword">
-                &nbsp&nbsp               
+                <input id="search" type="text" class="form-control" id="keyword" placeholder="Type Keyword" >
+                &nbsp&nbsp&nbsp
+                &nbsp               
                  <button type="button" class="btn btn-primary" id="searchButton">Search</button>
             </form>
         </div>
@@ -100,6 +98,7 @@
         var columbia = {lat: 40.806, lng: -73.963};
         var map = new google.maps.Map(document.getElementById('map'), {
           center: columbia,
+          minZoom: 2,
           zoom: 3,
           mapTypeControl: false,
           styles: [
@@ -230,7 +229,9 @@
                 marker.data = {'user': data['user'][i], 'time': data['time'][i], 'text': data['text'][i]};
 
                 marker.addListener('click', function() {
-                    infowindow.setContent("<p><h4>" +this.data['user'] + "</h4></p>" + "<div id='infowindow'>"+ this.data['text'] +"</div>"+"<br><p>" + this.data['time'] + "</p>");
+                    infowindow.setContent("<h4 style=\"color:Gray;\">" +this.data['user'] + "</h4>"
+                     + "<p>"+ this.data['text'] +"</p >"
+                     + "<p style=\"color:Gray;\">" + this.data['time'] + "</p >");
                     infowindow.open(map, this);
                     //map.setCenter(this.getPosition());
                 });
