@@ -13,7 +13,7 @@ access_token_secret = "nvwDEdY7a6MccvKFuQQvUmwcjadVKB4B7tc6aNwxRG7aw"
 consumer_key = "RKlq1R5ug0JeQooH3VgwYglXa"
 consumer_secret = "xwy29DNnp8SeoUwBdivi5KvW0UWGFctqZwqTZYr9k2ak25giO6"
 
-keywords = ['glad', 'lucky', 'happy', 'excited', 'wonderful', 'upset', 'bad', 'terrible', 'unhappy', 'sad']
+keywords = ['love', 'great', 'happy', 'excited', 'wonderful', 'good', 'bad', 'no', 'work', 'sad']
 
 
 # This is a basic listener that just prints received tweets to stdout
@@ -21,7 +21,9 @@ class StdOutListener(StreamListener):
 
 	def on_error(self, status):
 		#print status
-		pass
+		if status_code == 420:
+		#returning False in on_data disconnects the stream
+			return False
 	
 	def on_status(self, status):
 		try:
@@ -36,7 +38,7 @@ class StdOutListener(StreamListener):
 				#Store twitter data into elasticsearch
 				for key in keywords:
 					if key in tweet['text']:
-						es.index(index = 'twitters', doc_type = 'tweet', body = {
+						es.index(index = 'twitter', doc_type = 'tweet', body = {
 							'keyword': key,
 							'user': tweet['user'],
 							'text': tweet['text'],
@@ -54,8 +56,8 @@ if __name__ == '__main__':
 	#es = Elasticsearch()
 	#es.indices.delete(index='twitter', ignore=[400, 404])
 	es = Elasticsearch(['https://search-tweetmap-6c2ha6a5qww6zywmv7kxhj3gx4.us-east-1.es.amazonaws.com',])
-	if not es.indices.exists(index='twitters'):
-		es.indices.create(index='twitters', body={
+	if not es.indices.exists(index='twitter'):
+		es.indices.create(index='twitter', body={
         	'mappings': {
             	'tweet': {
                 	'properties': {
@@ -84,5 +86,5 @@ if __name__ == '__main__':
 	auth = OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 	stream = Stream(auth, l)
-
 	stream.filter(track = keywords)
+

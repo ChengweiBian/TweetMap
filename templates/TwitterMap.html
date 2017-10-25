@@ -23,7 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">    <style type="text/css">
 
-        #topNavbar {
+          #topNavbar {
             margin-bottom: 0px;
             background-color:transparent;
         }
@@ -38,7 +38,6 @@
 
 <body>
 
-<!-- Static navbar -->
 <!-- Static navbar -->
 <nav id="topNavbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -58,15 +57,15 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Keywords <span class="caret"></span></a>
                     <ul id="dropdown123" class="dropdown-menu">
-                         <li><a href="javascript: queryKeyWord('glad');">glad</a></li>
-                        <li><a href="javascript: queryKeyWord('lucky');">lucky</a></li>
+                        <li><a href="javascript: queryKeyWord('love');">love</a></li>
+                        <li><a href="javascript: queryKeyWord('great');">great</a></li>
                         <li><a href="javascript: queryKeyWord('happy');">happy</a></li>
                         <li><a href="javascript: queryKeyWord('excited');">excited</a></li>
                         <li><a href="javascript: queryKeyWord('wonderful');">wonderful</a></li>
-                        <li><a href="javascript: queryKeyWord('upset');">upset</a></li>
+                        <li><a href="javascript: queryKeyWord('good');">good</a></li>
                         <li><a href="javascript: queryKeyWord('bad');">bad</a></li>
-                        <li><a href="javascript: queryKeyWord('terrible');">terrible</a></li>
-                        <li><a href="javascript: queryKeyWord('unhappy');">unhappy</a></li>
+                        <li><a href="javascript: queryKeyWord('no');">no</a></li>
+                        <li><a href="javascript: queryKeyWord('work');">work</a></li>
                         <li><a href="javascript: queryKeyWord('sad');">sad</a></li>
                     </ul>
                 </li>
@@ -80,7 +79,6 @@
         </div>
     </div>
 </nav>
-
 {#<div class="container-fluid" style="height: 100%;">#}
 {#    <div class="row" style="height: 100%;">#}
 {#        <div class="col-xs-12 col-md-12 col-lg-12" id="map"></div>#}
@@ -94,7 +92,7 @@
     // Create socket
     var socket;
     var interval;
-    var timeInterval = 10000;
+    var timeInterval = 5000;
 
     function initMap() {
         // Init google map
@@ -215,10 +213,10 @@
                 var lng = tweet['location'][0];
                 var lat = tweet['location'][1];
                 //var latLng = new google.maps.LatLng(locations[i][1], locations[i][2]);
-                var v = 'doublecircle'
+                //var v = 'doublecircle'
                 var icon = {
                   url: '../static/'+ tweet['keyword'] + '.png',
-                  scaledSize: new google.maps.Size(5, 5)
+                  scaledSize: new google.maps.Size(3, 3)
                 };
 
                 var marker = new google.maps.Marker({
@@ -251,7 +249,7 @@
 
               clearInterval(interval);
               sendSocketMessage(JSON.stringify(js));
-              interval = setInterval(sendSocketMessage, timeInterval, "happy");
+              //interval = setInterval(sendSocketMessage, timeInterval, 'key' in data ? data['key'] : 'Init');
             });
 
         });
@@ -262,7 +260,7 @@
     function setUpMap(){
         clearInterval(interval);
         sendSocketMessage("Init");
-        interval = setInterval(sendSocketMessage, timeInterval, "Init");
+        //interval = setInterval(sendSocketMessage, timeInterval, "Init");
     };
 
     // Send key selected key word to back end, using it to search for tweets
@@ -272,7 +270,7 @@
         clearInterval(interval);
 
         sendSocketMessage(selectedWord);
-        interval = setInterval(sendSocketMessage, timeInterval, selectedWord);
+        //interval = setInterval(sendSocketMessage, timeInterval, selectedWord);
     };
 
 
@@ -297,7 +295,7 @@
         var keyWord = $('#keyword').val();
 
         sendSocketMessage(keyWord);
-        interval = setInterval(sendSocketMessage, timeInterval, keyWord);
+        //interval = setInterval(sendSocketMessage, timeInterval, keyWord);
     });
 
 </script>
