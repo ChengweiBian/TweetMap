@@ -21,12 +21,12 @@ def handleConnected(message):
     data = {}
     
     if message == 'Init':
-        results = es.search(index="twitter", size=2000, body={ "query": { "match_all": {} } })
+        results = es.search(index="twitter",size = 5000, body={ "query": { "match_all": {} } })
         print("INIT MAP")
 
     elif message in ['love', 'great', 'happy', 'excited', 'wonderful', 'good', 'bad', 'no', 'work', 'sad']:
         data['key'] = message
-        results = es.search(index="twitter", size=2000, body={"query": {'bool': {'must': {'match': {'keyword': message}}}}})
+        results = es.search(index="twitter", size = 5000, body={"query": {'bool': {'must': {'match': {'keyword': message}}}}})
         print("SEARCH: " + message)
 
     else:
@@ -34,12 +34,12 @@ def handleConnected(message):
         loc = dic['location']
         if 'key' in dic:
             data['key'] = dic['key']
-            results = es.search(index="twitter", size=2000, body={"query": {'bool': {
+            results = es.search(index="twitter", size = 5000, body={"query": {'bool': {
                 'must': {'match': {'keyword': dic['key']}},
                 'filter': {"geo_distance": {"distance":"500km",  "location": {"lat":  loc[0], "lon":loc[1] }}}}}})
             print("LOCAL SEARCH: " + dic['key'])
         else:
-            results = es.search(index="twitter", size=2000, body={"query": {'bool': {
+            results = es.search(index="twitter",size = 5000, body={"query": {'bool': {
                 'filter': {"geo_distance": {"distance":"500km",  "location": {"lat":  loc[0], "lon":loc[1] }}}}}})
             print("LOCAL SEARCH")
     
